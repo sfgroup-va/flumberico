@@ -1,0 +1,42 @@
+# Robots.txt for Flumbericoco AI Job Board
+# https://your-domain.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /_next/
+Disallow: /favicon.ico
+
+# Disallow authenticated user pages (optional)
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /applications
+Disallow: /analytics
+Disallow: /upgrade
+
+# Allow specific public assets
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Sitemap locations
+Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://your-domain.com/sitemap-index.xml
+
+# Crawl delay (optional, be nice to servers)
+Crawl-delay: 1
+
+# Popular search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

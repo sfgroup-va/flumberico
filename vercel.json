@@ -1,0 +1,17 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/job-matching",
+      "schedule": "0 */2 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-queues",
+      "schedule": "0 3 * * *"
+    }
+  ],
+  "functions": {
+    "src/app/api/cron/**/*.ts": {
+      "maxDuration": 300
+    }
+  }
+}

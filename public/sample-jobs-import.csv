@@ -1,0 +1,221 @@
+slug,title,type,locationType,location,description,salary,salaryMin,salaryMax,companyName,applicationEmail,applicationUrl,companyLogoUrl,approved,featured,isActive,expiresAt
+senior-fullstack-developer-techcorp,Senior Full-Stack Developer,Full-time,Remote,Remote,"We are looking for a Senior Full-Stack Developer to join our growing team. You will be responsible for developing and maintaining web applications using React, Node.js, and PostgreSQL. 
+
+Responsibilities:
+• Design and develop scalable web applications
+• Write clean, maintainable code
+• Collaborate with cross-functional teams
+• Mentor junior developers
+
+Requirements:
+• 5+ years of experience with JavaScript/TypeScript
+• Strong knowledge of React and Node.js
+• Experience with PostgreSQL or similar databases
+• Excellent problem-solving skills
+
+Benefits:
+• Competitive salary and equity
+• Health insurance
+• Flexible work hours
+• Remote-first culture",120000,100000,140000,TechCorp Inc,careers@techcorp.com,https://techcorp.com/careers,https://logo.clearbit.com/techcorp.com,true,false,true,2025-12-31
+frontend-developer-startupxyz,Frontend Developer,Full-time,Hybrid,"New York, NY","Join our team as a Frontend Developer! You'll work on building beautiful and responsive user interfaces using modern frameworks.
+
+What you'll do:
+• Build responsive web applications with React
+• Collaborate with designers to implement pixel-perfect UIs
+• Optimize application performance
+• Write unit and integration tests
+
+What we're looking for:
+• 3+ years of frontend development experience
+• Proficiency in React and TypeScript
+• Strong CSS skills and eye for design
+• Experience with modern build tools
+
+What we offer:
+• Competitive salary ($80k-$100k)
+• Hybrid work model (3 days in office)
+• Professional development budget
+• Great team culture",90000,80000,100000,StartupXYZ,jobs@startupxyz.com,https://startupxyz.com/apply,https://logo.clearbit.com/startupxyz.com,true,false,true,2025-12-31
+backend-engineer-cloudtech,Backend Engineer,Full-time,On-site,"San Francisco, CA","We need a talented Backend Engineer to help us scale our infrastructure. You'll work with microservices, databases, and APIs to build robust systems that power our platform.
+
+Key Responsibilities:
+• Design and implement RESTful APIs
+• Build and maintain microservices architecture
+• Optimize database queries and performance
+• Ensure system reliability and scalability
+
+Required Skills:
+• 5+ years backend development experience
+• Strong knowledge of Node.js or Python
+• Experience with PostgreSQL and Redis
+• Proficiency in Docker and Kubernetes
+• AWS cloud experience
+
+Perks:
+• $110k-$150k salary range
+• Stock options
+• Relocation assistance
+• Top-tier health benefits",130000,110000,150000,CloudTech Solutions,apply@cloudtech.io,https://cloudtech.io/careers,https://logo.clearbit.com/cloudtech.io,true,true,true,2025-12-31
+uiux-designer-designhub,UI/UX Designer,Full-time,Remote,Remote,"Creative UI/UX Designer wanted! Design beautiful interfaces and user experiences for our SaaS platform.
+
+Your Role:
+• Create user-centered designs for web and mobile
+• Conduct user research and usability testing
+• Develop wireframes, prototypes, and high-fidelity mockups
+• Collaborate with developers to ensure design implementation
+
+Requirements:
+• 3+ years of UI/UX design experience
+• Strong portfolio demonstrating design process
+• Proficiency in Figma and Adobe Creative Suite
+• Understanding of design systems and accessibility
+
+Benefits:
+• Fully remote position
+• $75k-$95k salary
+• Flexible schedule
+• Design conference budget",85000,75000,95000,DesignHub,careers@designhub.com,https://designhub.com/jobs,https://logo.clearbit.com/designhub.com,true,false,true,2025-12-31
+devops-engineer-infraco,DevOps Engineer,Full-time,Remote,Remote,"Looking for a DevOps Engineer to manage our cloud infrastructure and CI/CD pipelines.
+
+Responsibilities:
+• Manage AWS infrastructure and services
+• Build and maintain CI/CD pipelines
+• Implement monitoring and alerting systems
+• Automate deployment processes
+• Ensure system security and compliance
+
+Requirements:
+• 4+ years DevOps experience
+• Strong AWS knowledge
+• Experience with Docker and Kubernetes
+• Proficiency in Terraform or similar IaC tools
+• Scripting skills (Bash, Python)
+
+What we offer:
+• $100k-$130k compensation
+• Remote work from anywhere
+• Latest tech equipment
+• Learning and certification budget",115000,100000,130000,InfraCo,jobs@infraco.tech,https://infraco.tech/careers,https://logo.clearbit.com/infraco.tech,true,false,true,2025-12-31
+junior-web-developer-webworks,Junior Web Developer,Full-time,Hybrid,"Austin, TX","Great opportunity for a Junior Web Developer to learn and grow! You'll work alongside experienced developers building modern web applications.
+
+What you'll learn:
+• Modern web development with React
+• Backend development with Node.js
+• Database design and optimization
+• Agile development practices
+
+We're looking for:
+• 0-2 years of professional experience
+• Knowledge of HTML, CSS, and JavaScript
+• Familiarity with React or similar frameworks
+• Passion for learning and growth
+• Good communication skills
+
+We provide:
+• Mentorship program
+• $55k-$75k starting salary
+• Hybrid work (2 days remote)
+• Career growth opportunities",65000,55000,75000,WebWorks Agency,hr@webworks.com,https://webworks.com/apply,https://logo.clearbit.com/webworks.com,true,false,true,2025-12-31
+data-scientist-datacorp,Data Scientist,Full-time,Remote,Remote,"Data Scientist needed to analyze large datasets and build machine learning models.
+
+Your Responsibilities:
+• Analyze complex datasets to extract insights
+• Build and deploy machine learning models
+• Create data visualizations and reports
+• Collaborate with product teams on data-driven features
+
+Required Qualifications:
+• Master's or PhD in related field (or equivalent experience)
+• 4+ years of data science experience
+• Strong Python programming skills
+• Experience with TensorFlow or PyTorch
+• Solid understanding of statistics and ML algorithms
+
+Compensation & Benefits:
+• $110k-$140k base salary
+• Annual bonus
+• Remote-first company
+• Conference and education budget
+• Health, dental, vision insurance",125000,110000,140000,DataCorp,careers@datacorp.ai,https://datacorp.ai/jobs,https://logo.clearbit.com/datacorp.ai,true,true,true,2025-12-31
+mobile-developer-mobilefirst,Mobile Developer (React Native),Full-time,On-site,"Los Angeles, CA","Build amazing mobile apps with React Native! We're looking for a developer passionate about mobile experiences.
+
+What you'll do:
+• Develop cross-platform mobile apps with React Native
+• Integrate with REST APIs and third-party services
+• Optimize app performance and user experience
+• Publish apps to App Store and Google Play
+
+Requirements:
+• 3+ years mobile development experience
+• Strong React Native skills
+• Experience with iOS and Android platforms
+• Knowledge of mobile UI/UX best practices
+• Familiarity with Firebase or similar services
+
+Perks:
+• $85k-$105k salary
+• Stock options
+• Gym membership
+• Catered lunches
+• Great office in LA",95000,85000,105000,MobileFirst Inc,jobs@mobilefirst.com,https://mobilefirst.com/careers,https://logo.clearbit.com/mobilefirst.com,true,false,true,2025-12-31
+product-manager-productco,Product Manager,Full-time,Hybrid,"Seattle, WA","Experienced Product Manager to lead our product strategy and roadmap.
+
+Key Responsibilities:
+• Define product vision and strategy
+• Prioritize features and manage roadmap
+• Work closely with engineering and design
+• Conduct user research and gather feedback
+• Analyze metrics and make data-driven decisions
+
+Qualifications:
+• 5+ years product management experience
+• Strong technical background
+• Excellent communication skills
+• Experience with Agile methodologies
+• Data-driven decision making
+
+Benefits:
+• $120k-$150k base salary
+• Equity package
+• Hybrid work model
+• Unlimited PTO
+• Professional development budget",135000,120000,150000,ProductCo,pm-jobs@productco.com,https://productco.com/careers,https://logo.clearbit.com/productco.com,true,false,true,2025-12-31
+qa-engineer-qualitytech,QA Engineer,Full-time,Remote,Remote,"Quality Assurance Engineer to ensure our software meets the highest standards.
+
+Responsibilities:
+• Design and execute test plans
+• Develop automated test scripts
+• Perform manual and automated testing
+• Report and track bugs
+• Collaborate with developers on quality improvements
+
+Requirements:
+• 3+ years QA experience
+• Strong knowledge of testing methodologies
+• Experience with Selenium, Jest, or Cypress
+• Familiarity with CI/CD pipelines
+• Good communication skills
+
+What we offer:
+• $70k-$90k salary
+• Fully remote position
+• Flexible hours
+• Modern testing tools
+• Supportive team environment",80000,70000,90000,QualityTech,careers@qualitytech.io,https://qualitytech.io/jobs,https://logo.clearbit.com/qualitytech.io,true,false,true,2025-12-31
+empty-template-row,Job Title Here,Full-time,Remote,Remote,"Job description goes here.
+
+Responsibilities:
+• Responsibility 1
+• Responsibility 2
+• Responsibility 3
+
+Requirements:
+• Requirement 1
+• Requirement 2
+• Requirement 3
+
+Benefits:
+• Benefit 1
+• Benefit 2
+• Benefit 3",100000,90000,110000,Company Name,jobs@company.com,https://company.com/careers,https://logo.clearbit.com/company.com,true,false,true,2025-12-31

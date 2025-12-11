@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ADMIN SITEMAP - FOR INTERNAL USE ONLY -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://your-domain.com/admin</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+  <url>
+    <loc>https://your-domain.com/admin/jobs</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+  <url>
+    <loc>https://your-domain.com/admin/analytics</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.4</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+  <url>
+    <loc>https://your-domain.com/admin/import</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+  <url>
+    <loc>https://your-domain.com/admin/subscriptions</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+  <url>
+    <loc>https://your-domain.com/admin/jobs/new</loc>
+    <lastmod>2025-11-10T15:14:56.303Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+    <!-- NOTE: This page should have meta robots="noindex" -->
+  </url>
+</urlset>

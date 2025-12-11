@@ -1,0 +1,950 @@
+'use client';
+
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Search,
+  MapPin,
+  Briefcase,
+  DollarSign,
+  Clock,
+  Building,
+  Filter,
+  ChevronDown,
+  ExternalLink,
+  X,
+  TrendingUp,
+  Users,
+  ArrowRight,
+  Grid3X3,
+  List,
+  SlidersHorizontal
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+
+interface Job {
+  id: string;
+  slug?: string;
+  title: string;
+  companyName: string;
+  companyLogoUrl?: string; // Added company logo
+  location: string;
+  type: string;
+  salary: string;
+  description: string;
+  postedAt: string;
+}
+
+export default function SearchPage() {
+
+  // All useState hooks must come first
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState('all');
+  const [selectedType, setSelectedType] = useState('all');
+  const [selectedSalary, setSelectedSalary] = useState('all');
+  const [selectedExperience, setSelectedExperience] = useState('all');
+  const [showFilters, setShowFilters] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid'); // Changed to grid by default
+  const [sortBy, setSortBy] = useState('relevance');
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [jobsPerPage] = useState(20);
+
+  // useMemo must come before useEffect
+  const stats = useMemo(() => ({
+    total: jobs.length,
+    filtered: filteredJobs.length
+  }), [jobs, filteredJobs]);
+
+  // Get unique locations and types for filters
+  const locations = ['all', ...Array.from(new Set(
+    jobs
+      .filter(job => job.location)
+      .map(job => job.location.split(',')[0])
+  ))];
+  const types = ['all', 'Full-time', 'Part-time', 'Contract', 'Remote'];
+  const salaryRanges = ['all', '0-50k', '50k-100k', '100k-150k', '150k+'];
+  const experienceLevels = ['all', 'entry', 'mid', 'senior', 'executive'];
+  const sortOptions = [
+    { value: 'relevance', label: 'Most Relevant' },
+    { value: 'recent', label: 'Most Recent' },
+    { value: 'salary-high', label: 'Highest Salary' },
+    { value: 'salary-low', label: 'Lowest Salary' }
+  ];
+
+  // Clear all filters
+  const clearAllFilters = () => {
+    setSelectedLocation('all');
+    setSelectedType('all');
+    setSelectedSalary('all');
+    setSelectedExperience('all');
+    setSearchQuery('');
+    setSortBy('relevance');
+    setCurrentPage(1);
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  useEffect(() => {
+    filterJobs();
+  }, [jobs, searchQuery, selectedLocation, selectedType, selectedSalary, selectedExperience, sortBy]);
+
+  // Generate search suggestions
+  useEffect(() => {
+    if (searchQuery.length > 2) {
+      const suggestions = generateSearchSuggestions(searchQuery);
+      setSearchSuggestions(suggestions);
+      setShowSuggestions(true);
+    } else {
+      setSearchSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [searchQuery]);
+
+  // Update active filters
+  useEffect(() => {
+    const filters = [];
+    if (selectedLocation !== 'all') filters.push(selectedLocation);
+    if (selectedType !== 'all') filters.push(selectedType);
+    if (selectedSalary !== 'all') filters.push(selectedSalary);
+    if (selectedExperience !== 'all') filters.push(selectedExperience);
+    setActiveFilters(filters);
+  }, [selectedLocation, selectedType, selectedSalary, selectedExperience]);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedLocation, selectedType, selectedSalary, selectedExperience, sortBy]);
+
+  const fetchJobs = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/jobs?limit=-1');
+      if (response.ok) {
+        const data = await response.json();
+        setJobs(data.jobs || []);
+      } else {
+        console.error('Failed to fetch jobs:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const generateSearchSuggestions = (query: string) => {
+    const suggestions = [];
+    const lowerQuery = query.toLowerCase();
+
+    // Job title suggestions
+    const jobTitles = Array.from(new Set(jobs.map(job => job.title).filter(Boolean)));
+    const matchingTitles = jobTitles.filter(title =>
+      title.toLowerCase().includes(lowerQuery)
+    ).slice(0, 3);
+
+    // Company suggestions
+    const companies = Array.from(new Set(jobs.map(job => job.companyName).filter(Boolean)));
+    const matchingCompanies = companies.filter(company =>
+      company.toLowerCase().includes(lowerQuery)
+    ).slice(0, 2);
+
+    suggestions.push(...matchingTitles, ...matchingCompanies);
+    return suggestions;
+  };
+
+  const filterJobs = () => {
+    let filtered = jobs;
+
+    // Filter by search query
+    if (searchQuery) {
+      filtered = filtered.filter(job =>
+        (job.title?.toLowerCase().includes(searchQuery.toLowerCase()) || false) ||
+        (job.companyName?.toLowerCase().includes(searchQuery.toLowerCase()) || false) ||
+        (job.description?.toLowerCase().includes(searchQuery.toLowerCase()) || false)
+      );
+    }
+
+    // Filter by location
+    if (selectedLocation !== 'all') {
+      filtered = filtered.filter(job =>
+        job.location?.toLowerCase().includes(selectedLocation.toLowerCase()) || false
+      );
+    }
+
+    // Filter by type
+    if (selectedType !== 'all') {
+      filtered = filtered.filter(job => job.type === selectedType);
+    }
+
+    // Filter by salary
+    if (selectedSalary !== 'all') {
+      filtered = filtered.filter(job => {
+        if (!job.salary) return false;
+        // Handle salary filtering
+        const salaryString = job.salary;
+        const salary = parseInt(salaryString.replace(/[^0-9]/g, ''));
+        switch (selectedSalary) {
+          case '0-50k': return salary <= 50000;
+          case '50k-100k': return salary > 50000 && salary <= 100000;
+          case '100k-150k': return salary > 100000 && salary <= 150000;
+          case '150k+': return salary > 150000;
+          default: return true;
+        }
+      });
+    }
+
+    // Filter by experience
+    if (selectedExperience !== 'all') {
+      filtered = filtered.filter(job => {
+        const title = job.title?.toLowerCase() || '';
+        switch (selectedExperience) {
+          case 'entry': return title.includes('junior') || title.includes('entry') || title.includes('associate');
+          case 'mid': return title.includes('mid') || title.includes('intermediate') || title.includes('regular');
+          case 'senior': return title.includes('senior') || title.includes('lead') || title.includes('principal');
+          case 'executive': return title.includes('manager') || title.includes('director') || title.includes('vp') || title.includes('executive');
+          default: return true;
+        }
+      });
+    }
+
+    // Sort results
+    switch (sortBy) {
+      case 'recent':
+        filtered.sort((a, b) => new Date(b.postedAt || 0).getTime() - new Date(a.postedAt || 0).getTime());
+        break;
+      case 'salary-high':
+        filtered.sort((a, b) => {
+          const salaryA = parseInt((a.salary || '').replace(/[^0-9]/g, '')) || 0;
+          const salaryB = parseInt((b.salary || '').replace(/[^0-9]/g, '')) || 0;
+          return salaryB - salaryA;
+        });
+        break;
+      case 'salary-low':
+        filtered.sort((a, b) => {
+          const salaryA = parseInt((a.salary || '').replace(/[^0-9]/g, '')) || 0;
+          const salaryB = parseInt((b.salary || '').replace(/[^0-9]/g, '')) || 0;
+          return salaryA - salaryB;
+        });
+        break;
+      case 'relevance':
+      default:
+        // Keep original order or implement relevance scoring
+        break;
+    }
+
+    setFilteredJobs(filtered);
+  };
+
+  // Pagination logic
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+
+  // Pagination functions
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const goToPreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+  const goToNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
+
+  // Generate page numbers for display
+  const getPageNumbers = () => {
+    const maxVisiblePages = 5;
+    const pages = [];
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+    }
+
+    return pages;
+  };
+
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-secondary to-background">
+      {/* Enhanced Header with Stats */}
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-card border-b border-border/50 sticky top-0 z-40 backdrop-blur-lg bg-background/80"
+      >
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="text-muted-foreground hover:text-neon-blue transition-colors flex items-center gap-2">
+                <ArrowRight className="w-4 h-4 rotate-180" />
+                Back to Home
+              </Link>
+              <div className="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl flex items-center justify-center shadow-lg">
+                <Search className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
+                  Discover Your Dream Job
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  {stats.total}+ opportunities waiting for you
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              {/* View Mode Toggle */}
+              <div className="flex items-center bg-background/50 rounded-lg p-1 border border-border/50">
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md transition-all duration-200 ${viewMode === 'list'
+                    ? 'bg-neon-blue/20 text-neon-blue shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                >
+                  <List className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md transition-all duration-200 ${viewMode === 'grid'
+                    ? 'bg-neon-blue/20 text-neon-blue shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                >
+                  <Grid3X3 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <motion.div
+              className="bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 rounded-lg p-3 border border-neon-blue/20"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-neon-blue" />
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.filtered}</p>
+                  <p className="text-xs text-muted-foreground">Jobs Found</p>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              className="bg-gradient-to-r from-neon-green/10 to-emerald/10 rounded-lg p-3 border border-neon-green/20"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-neon-green" />
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.total}</p>
+                  <p className="text-xs text-muted-foreground">Total Jobs</p>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div
+              className="bg-gradient-to-r from-orange/10 to-red/10 rounded-lg p-3 border border-orange/20"
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-center gap-2">
+                <SlidersHorizontal className="w-5 h-5 text-orange" />
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{activeFilters.length}</p>
+                  <p className="text-xs text-muted-foreground">Active Filters</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.header>
+
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Enhanced Search and Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass-card p-6 mb-8"
+        >
+          <div className="flex flex-col gap-4">
+            {/* Enhanced Search Bar with Suggestions */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 z-10" />
+              <input
+                type="text"
+                placeholder="Search jobs, companies, or keywords... (try 'developer' or 'designer')"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                className="w-full pl-12 pr-4 py-4 bg-background/70 border border-border/50 rounded-xl focus:outline-none focus:border-neon-blue/50 focus:bg-neon-blue/10 transition-all text-lg shadow-sm"
+              />
+
+              {/* Search Suggestions Dropdown */}
+              <AnimatePresence>
+                {showSuggestions && searchSuggestions.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-background/95 backdrop-blur-sm border border-border/50 rounded-xl shadow-lg z-50 overflow-hidden"
+                  >
+                    {searchSuggestions.map((suggestion, index) => (
+                      <motion.button
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        onClick={() => {
+                          setSearchQuery(suggestion);
+                          setShowSuggestions(false);
+                        }}
+                        className="w-full px-4 py-3 text-left hover:bg-neon-blue/10 transition-colors border-b border-border/20 last:border-b-0"
+                      >
+                        <div className="flex items-center gap-3">
+                          <Search className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-foreground">{suggestion}</span>
+                        </div>
+                      </motion.button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Top Action Bar */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {/* Enhanced Filter Toggle */}
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`px-6 py-3 rounded-xl transition-all duration-200 flex items-center gap-2 font-medium ${activeFilters.length > 0
+                    ? 'bg-neon-blue/20 text-neon-blue border-2 border-neon-blue/50'
+                    : 'bg-background/50 border border-border/50 hover:border-neon-blue/50 hover:bg-neon-blue/10'
+                    }`}
+                >
+                  <SlidersHorizontal className="w-4 h-4" />
+                  Filters
+                  {activeFilters.length > 0 && (
+                    <span className="bg-neon-blue text-white text-xs px-2 py-1 rounded-full">
+                      {activeFilters.length}
+                    </span>
+                  )}
+                  <ChevronDown className={`w-4 h-4 transform transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Sort Dropdown */}
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-3 bg-card border border-border/50 rounded-xl focus:outline-none focus:border-neon-blue/50 font-medium text-foreground"
+                  style={{
+                    backgroundColor: 'hsl(var(--card))',
+                    color: 'hsl(var(--foreground))'
+                  }}
+                >
+                  {sortOptions.map(option => (
+                    <option
+                      key={option.value}
+                      value={option.value}
+                      style={{
+                        backgroundColor: 'hsl(var(--background))',
+                        color: 'hsl(var(--foreground))'
+                      }}
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Clear Filters */}
+                {activeFilters.length > 0 && (
+                  <button
+                    onClick={clearAllFilters}
+                    className="px-4 py-3 text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Clear All
+                  </button>
+                )}
+              </div>
+
+              {/* Active Filters Pills */}
+              {activeFilters.length > 0 && (
+                <div className="flex items-center gap-2 flex-wrap">
+                  {activeFilters.map((filter, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-neon-blue/10 text-neon-blue rounded-full text-sm font-medium flex items-center gap-1"
+                    >
+                      {filter}
+                      <button
+                        onClick={() => {
+                          if (locations.includes(filter)) setSelectedLocation('all');
+                          else if (types.includes(filter)) setSelectedType('all');
+                          else if (salaryRanges.includes(filter)) setSelectedSalary('all');
+                          else if (experienceLevels.includes(filter)) setSelectedExperience('all');
+                        }}
+                        className="hover:bg-neon-blue/20 rounded-full p-0.5"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Enhanced Advanced Filters */}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="mt-6 pt-6 border-t border-border/50"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Location Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-neon-blue" />
+                      Location
+                    </label>
+                    <select
+                      value={selectedLocation}
+                      onChange={(e) => setSelectedLocation(e.target.value)}
+                      className="w-full px-4 py-3 bg-card border border-border/50 rounded-lg focus:outline-none focus:border-neon-blue/50 focus:bg-neon-blue/10 transition-all text-foreground"
+                      style={{
+                        backgroundColor: 'hsl(var(--card))',
+                        color: 'hsl(var(--foreground))'
+                      }}
+                    >
+                      {locations.map(location => (
+                        <option
+                          key={location}
+                          value={location}
+                          style={{
+                            backgroundColor: 'hsl(var(--background))',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                        >
+                          {location === 'all' ? '🌍 All Locations' : location}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Job Type Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
+                      <Briefcase className="w-4 h-4 text-neon-green" />
+                      Job Type
+                    </label>
+                    <select
+                      value={selectedType}
+                      onChange={(e) => setSelectedType(e.target.value)}
+                      className="w-full px-4 py-3 bg-card border border-border/50 rounded-lg focus:outline-none focus:border-neon-blue/50 focus:bg-neon-blue/10 transition-all text-foreground"
+                      style={{
+                        backgroundColor: 'hsl(var(--card))',
+                        color: 'hsl(var(--foreground))'
+                      }}
+                    >
+                      {types.map(type => (
+                        <option
+                          key={type}
+                          value={type}
+                          style={{
+                            backgroundColor: 'hsl(var(--background))',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                        >
+                          {type === 'all' ? '💼 All Types' : type}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Salary Range Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
+                      <DollarSign className="w-4 h-4 text-neon-purple" />
+                      Salary Range
+                    </label>
+                    <select
+                      value={selectedSalary}
+                      onChange={(e) => setSelectedSalary(e.target.value)}
+                      className="w-full px-4 py-3 bg-card border border-border/50 rounded-lg focus:outline-none focus:border-neon-blue/50 focus:bg-neon-blue/10 transition-all text-foreground"
+                      style={{
+                        backgroundColor: 'hsl(var(--card))',
+                        color: 'hsl(var(--foreground))'
+                      }}
+                    >
+                      {salaryRanges.map(range => (
+                        <option
+                          key={range}
+                          value={range}
+                          style={{
+                            backgroundColor: 'hsl(var(--background))',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                        >
+                          {range === 'all' ? '💰 Any Salary' :
+                            range === '0-50k' ? '💵 $0 - $50k' :
+                              range === '50k-100k' ? '💵 $50k - $100k' :
+                                range === '100k-150k' ? '💵 $100k - $150k' :
+                                  '💵 $150k+'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Experience Level Filter */}
+                  <div>
+                    <label className="block text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
+                      <Users className="w-4 h-4 text-orange" />
+                      Experience Level
+                    </label>
+                    <select
+                      value={selectedExperience}
+                      onChange={(e) => setSelectedExperience(e.target.value)}
+                      className="w-full px-4 py-3 bg-card border border-border/50 rounded-lg focus:outline-none focus:border-neon-blue/50 focus:bg-neon-blue/10 transition-all text-foreground"
+                      style={{
+                        backgroundColor: 'hsl(var(--card))',
+                        color: 'hsl(var(--foreground))'
+                      }}
+                    >
+                      {experienceLevels.map(level => (
+                        <option
+                          key={level}
+                          value={level}
+                          style={{
+                            backgroundColor: 'hsl(var(--background))',
+                            color: 'hsl(var(--foreground))'
+                          }}
+                        >
+                          {level === 'all' ? '🎯 All Levels' :
+                            level === 'entry' ? '🌱 Entry Level' :
+                              level === 'mid' ? '🚀 Mid Level' :
+                                level === 'senior' ? '⭐ Senior Level' :
+                                  level === 'executive' ? '🏆 Executive Level' :
+                                    'All Levels'}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Quick Filter Pills */}
+                <div className="mt-6 pt-6 border-t border-border/30">
+                  <p className="text-sm font-semibold mb-3 text-foreground">Quick Filters:</p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => setSelectedLocation('Remote')}
+                      className="px-4 py-2 bg-card border border-border/50 rounded-full hover:bg-neon-blue/10 hover:border-neon-blue/50 transition-all text-sm font-medium text-foreground"
+                    >
+                      🏠 Remote Only
+                    </button>
+                    <button
+                      onClick={() => setSelectedType('Full-time')}
+                      className="px-4 py-2 bg-card border border-border/50 rounded-full hover:bg-neon-blue/10 hover:border-neon-blue/50 transition-all text-sm font-medium text-foreground"
+                    >
+                      ⏰ Full-time
+                    </button>
+                    <button
+                      onClick={() => setSelectedSalary('150k+')}
+                      className="px-4 py-2 bg-card border border-border/50 rounded-full hover:bg-neon-blue/10 hover:border-neon-blue/50 transition-all text-sm font-medium text-foreground"
+                    >
+                      💎 $100k+
+                    </button>
+                    <button
+                      onClick={() => setSelectedExperience('senior')}
+                      className="px-4 py-2 bg-card border border-border/50 rounded-full hover:bg-neon-blue/10 hover:border-neon-blue/50 transition-all text-sm font-medium text-foreground"
+                    >
+                      🏆 Senior Roles
+                    </button>
+                    <button
+                      onClick={() => setSortBy('recent')}
+                      className="px-4 py-2 bg-card border border-border/50 rounded-full hover:bg-neon-blue/10 hover:border-neon-blue/50 transition-all text-sm font-medium text-foreground"
+                    >
+                      📅 Posted Today
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Job Results */}
+        {loading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin w-8 h-8 border-2 border-neon-blue border-t-transparent rounded-full" />
+          </div>
+        ) : filteredJobs.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="glass-card p-12 text-center"
+          >
+            <Search className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">No jobs found</h3>
+            <p className="text-muted-foreground">
+              Try adjusting your search terms or filters
+            </p>
+          </motion.div>
+        ) : (
+          <>
+            {/* Job Results */}
+            <div className={
+              viewMode === 'grid'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
+                : 'space-y-6'
+            }>
+              {currentJobs.map((job, index) => (
+                <motion.div
+                  key={job.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`glass-card p-6 hover-glow ${viewMode === 'grid' ? 'h-full flex flex-col' : ''
+                    }`}
+                >
+                  {viewMode === 'list' ? (
+                    /* List View */
+                    <>
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          {job.companyLogoUrl ? (
+                            <div className="w-16 h-16 relative rounded-lg overflow-hidden bg-background border border-border/50">
+                              <Image
+                                fill
+                                src={job.companyLogoUrl}
+                                alt={job.companyName}
+                                className="object-contain p-2"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-border/50">
+                              <Building className="w-8 h-8 text-muted-foreground" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-2">
+                            <h3 className="text-xl font-semibold text-foreground">{job.title || 'Untitled Position'}</h3>
+                            <span className="px-2 py-1 bg-neon-blue/10 text-neon-blue text-xs rounded-full">
+                              {job.type || 'Full-time'}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                            <div className="flex items-center gap-1">
+                              <Building className="w-4 h-4" />
+                              {job.companyName || 'Unknown Company'}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <MapPin className="w-4 h-4" />
+                              {job.location || 'Remote'}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <DollarSign className="w-4 h-4" />
+                              {job.salary && !isNaN(Number(job.salary)) ? Number(job.salary).toLocaleString() : (job.salary || 'Competitive')}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              {job.postedAt || 'Recently'}
+                            </div>
+                          </div>
+
+                          <p className="text-muted-foreground mb-4 line-clamp-2">
+                            {job.description || 'No description available.'}
+                          </p>
+
+                          <div className="flex items-center gap-3">
+                            <Link
+                              href={`/jobs/${job.slug || job.id}`}
+                              className="px-4 py-2 text-neon-blue border border-neon-blue/30 rounded-lg font-medium hover:bg-neon-blue/10 transition-colors flex items-center gap-2"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              View Details
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    /* Grid View */
+                    <>
+                      <div className="flex-1 flex flex-col">
+                        {/* Header */}
+                        <div className="mb-4">
+                          <div className="flex items-start gap-4 mb-3">
+                            <div className="flex-shrink-0">
+                              {job.companyLogoUrl ? (
+                                <div className="w-12 h-12 relative rounded-lg overflow-hidden bg-background border border-border/50">
+                                  <Image
+                                    fill
+                                    src={job.companyLogoUrl}
+                                    alt={job.companyName}
+                                    className="object-contain p-1"
+                                  />
+                                </div>
+                              ) : (
+                                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-border/50">
+                                  <Building className="w-6 h-6 text-muted-foreground" />
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-lg font-semibold text-foreground line-clamp-2 leading-tight mb-1">
+                                {job.title || 'Untitled Position'}
+                              </h3>
+                              <div className="text-sm font-medium text-neon-blue truncate">
+                                {job.companyName || 'Unknown Company'}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            <span className="px-2 py-1 bg-neon-blue/10 text-neon-blue text-xs rounded-full whitespace-nowrap">
+                              {job.type || 'Full-time'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Details */}
+                        <div className="space-y-2 mb-4 text-sm">
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <MapPin className="w-3 h-3 flex-shrink-0" />
+                            <span className="truncate">{job.location || 'Remote'}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <DollarSign className="w-3 h-3 flex-shrink-0" />
+                            <span>{job.salary && !isNaN(Number(job.salary)) ? Number(job.salary).toLocaleString() : (job.salary || 'Competitive')}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <Clock className="w-3 h-3 flex-shrink-0" />
+                            <span>{job.postedAt || 'Recently'}</span>
+                          </div>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-1">
+                          {job.description || 'No description available.'}
+                        </p>
+
+                        {/* Actions */}
+                        <div className="mt-auto">
+                          <Link
+                            href={`/jobs/${job.slug || job.id}`}
+                            className="w-full px-4 py-2 text-neon-blue border border-neon-blue/30 rounded-lg font-medium hover:bg-neon-blue/10 transition-colors flex items-center justify-center gap-2"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            View Details
+                          </Link>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Pagination UI */}
+            {totalPages > 1 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="glass-card p-6 mt-8"
+              >
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  {/* Results Info */}
+                  <div className="text-sm text-muted-foreground">
+                    Showing {indexOfFirstJob + 1}-{Math.min(indexOfLastJob, filteredJobs.length)} of {filteredJobs.length} jobs
+                  </div>
+
+                  {/* Pagination Controls */}
+                  <div className="flex items-center gap-2">
+                    {/* Previous Button */}
+                    <button
+                      onClick={goToPreviousPage}
+                      disabled={currentPage === 1}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${currentPage === 1
+                        ? 'bg-muted/20 text-muted-foreground/50 cursor-not-allowed border border-border/20'
+                        : 'bg-neon-blue/10 text-neon-blue hover:bg-neon-blue/20 border border-neon-blue/30'
+                        }`}
+                    >
+                      <ChevronDown className="w-4 h-4 rotate-90" />
+                      Previous
+                    </button>
+
+                    {/* Page Numbers */}
+                    <div className="flex items-center gap-1">
+                      {getPageNumbers().map((pageNum) => (
+                        <button
+                          key={pageNum}
+                          onClick={() => paginate(pageNum)}
+                          className={`w-10 h-10 rounded-lg font-medium transition-all duration-200 ${currentPage === pageNum
+                            ? 'bg-neon-blue text-white shadow-lg'
+                            : 'bg-card border border-border/50 text-foreground hover:bg-neon-blue/10 hover:border-neon-blue/50'
+                            }`}
+                        >
+                          {pageNum}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Next Button */}
+                    <button
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 ${currentPage === totalPages
+                        ? 'bg-muted/20 text-muted-foreground/50 cursor-not-allowed border border-border/20'
+                        : 'bg-neon-blue/10 text-neon-blue hover:bg-neon-blue/20 border border-neon-blue/30'
+                        }`}
+                    >
+                      Next
+                      <ChevronDown className="w-4 h-4 -rotate-90" />
+                    </button>
+                  </div>
+
+                  {/* Jump to Page */}
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="text-muted-foreground">Page</span>
+                    <input
+                      type="number"
+                      min={1}
+                      max={totalPages}
+                      value={currentPage}
+                      onChange={(e) => {
+                        const page = parseInt(e.target.value);
+                        if (page >= 1 && page <= totalPages) {
+                          paginate(page);
+                        }
+                      }}
+                      className="w-16 px-2 py-1 bg-card border border-border/50 rounded text-center focus:outline-none focus:border-neon-blue/50"
+                    />
+                    <span className="text-muted-foreground">of {totalPages}</span>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+      </main>
+    </div>
+  );
+}

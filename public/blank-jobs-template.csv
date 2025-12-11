@@ -1,0 +1,2 @@
+slug,title,type,locationType,location,description,salary,salaryMin,salaryMax,companyName,applicationEmail,applicationUrl,companyLogoUrl,approved,featured,isActive,expiresAt
+your-job-slug-here,Your Job Title,Full-time,Remote,Remote,"Write your job description here. Include responsibilities, requirements, and benefits.",100000,90000,110000,Your Company Name,jobs@yourcompany.com,https://yourcompany.com/careers,,true,false,true,2025-12-31

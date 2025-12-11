@@ -1,0 +1,349 @@
+slug,title,type,locationType,location,description,salary,companyName,applicationEmail,applicationUrl,companyLogoUrl,approved
+senior-frontend-developer-react-typescript-nyc,Senior Frontend Developer (React/TypeScript),Full-time,Hybrid,"New York, NY","We are seeking a talented Senior Frontend Developer to join our innovative team in building cutting-edge web applications. You will work with React, TypeScript, Next.js, and modern CSS frameworks to create exceptional user experiences.
+
+Key Responsibilities:
+- Develop responsive, accessible web applications using React and TypeScript
+- Collaborate with UX/UI designers to implement pixel-perfect designs
+- Optimize application performance for maximum speed and scalability
+- Mentor junior developers and conduct code reviews
+- Work in an Agile environment with cross-functional teams
+
+Requirements:
+- 5+ years of professional frontend development experience
+- Expert knowledge of React, TypeScript, and modern JavaScript
+- Strong understanding of HTML5, CSS3, and responsive design principles
+- Experience with state management (Redux, Zustand, or similar)
+- Familiarity with testing frameworks (Jest, React Testing Library)
+- Excellent problem-solving and communication skills
+
+What We Offer:
+- Competitive salary and comprehensive benefits package
+- Flexible work arrangements (3 days office, 2 days remote)
+- Professional development opportunities and training budget
+- Modern office space in Manhattan with great amenities
+- Collaborative team culture and regular team events",120000,TechVision Inc,careers@techvision.com,https://techvision.com/careers/senior-frontend,https://techvision.com/logos/techvision.png,true
+fullstack-engineer-nodejs-react-san-francisco,Full Stack Engineer (Node.js/React),Full-time,Remote,"San Francisco, CA","Join our dynamic engineering team to build scalable web applications that serve thousands of users daily. You'll work with modern technologies including Node.js, React, PostgreSQL, and cloud services to deliver exceptional products.
+
+Your Role:
+- Design and develop RESTful APIs and microservices using Node.js
+- Build responsive frontend applications with React and TypeScript
+- Implement database solutions and optimize query performance
+- Deploy and manage applications on AWS/GCP cloud platforms
+- Participate in code reviews and architectural decisions
+- Collaborate with product managers and designers
+
+Technical Stack:
+- Backend: Node.js, Express, PostgreSQL, MongoDB
+- Frontend: React, TypeScript, Tailwind CSS
+- Cloud: AWS, Docker, Kubernetes
+- Tools: Git, Jest, CI/CD pipelines
+
+Requirements:
+- 4+ years of full-stack development experience
+- Strong proficiency in JavaScript/TypeScript and Node.js
+- Experience with React and modern frontend frameworks
+- Knowledge of database design and SQL/NoSQL databases
+- Familiarity with cloud services and DevOps practices
+- Bachelor's degree in Computer Science or related field
+
+Benefits:
+- Remote-first culture with flexible working hours
+- Health, dental, and vision insurance
+- 401(k) with company matching
+- Annual stipend for professional development
+- Monthly team building activities and retreats",115000,CloudScale Technologies,hiring@cloudscale.io,https://cloudscale.io/jobs/fullstack-engineer,https://cloudscale.io/logos/cloudscale.png,true
+backend-developer-python-aws-seattle,Backend Developer (Python/AWS),Contract,Remote,"Seattle, WA","We are looking for an experienced Backend Developer to join our team and work on mission-critical API and microservices architecture. This is a 6-month contract position with potential for extension.
+
+Scope of Work:
+- Develop and maintain scalable backend services using Python and FastAPI
+- Design and implement RESTful APIs and GraphQL endpoints
+- Work with AWS services including Lambda, EC2, RDS, and DynamoDB
+- Optimize database performance and implement caching strategies
+- Ensure security best practices and data protection
+- Collaborate with frontend teams for API integration
+
+Technical Requirements:
+- 5+ years of backend development experience
+- Strong expertise in Python and frameworks like Django, FastAPI, or Flask
+- Experience with cloud platforms (AWS preferred, Azure/GCP acceptable)
+- Knowledge of microservices architecture and containerization
+- Understanding of database systems (PostgreSQL, MongoDB, Redis)
+- Familiarity with CI/CD pipelines and DevOps practices
+
+Skills We Value:
+- Problem-solving mindset and attention to detail
+- Strong communication and teamwork abilities
+- Experience with agile development methodologies
+- Knowledge of security best practices
+- Performance optimization skills
+
+Contract Details:
+- Duration: 6 months with potential extension
+- Competitive hourly rate based on experience
+- Flexible working hours and remote work option
+- Opportunity to work on cutting-edge projects",125000,DataFlow Systems,backend@dataflow.io,https://dataflow.io/careers,https://dataflow.io/logos/dataflow.png,true
+product-manager-saas-austin,Product Manager (SaaS Platform),Full-time,On-site,"Austin, TX","Lead product strategy and development for our rapidly growing SaaS platform serving 10,000+ users worldwide. You'll be the voice of our customers and work at the intersection of business, technology, and user experience.
+
+What You'll Do:
+- Define product vision, strategy, and roadmap for our SaaS platform
+- Conduct user research and gather feedback to inform product decisions
+- Work closely with engineering, design, and sales teams
+- Create detailed product requirements and user stories
+- Analyze market trends and competitive landscape
+- Manage product lifecycle from concept to launch and beyond
+
+Key Responsibilities:
+- Prioritize features based on business impact and user value
+- Collaborate with engineering teams on technical feasibility
+- Define and track product KPIs and success metrics
+- Present product roadmap to stakeholders and executive team
+- Lead go-to-market strategies for new features
+
+Requirements:
+- 3+ years of product management experience in SaaS/tech
+- Strong analytical skills and data-driven decision making
+- Experience with product management tools (Jira, Figma, analytics)
+- Excellent communication and presentation skills
+- Technical background or ability to work closely with engineering teams
+- MBA or relevant business degree preferred
+
+Why Join Us:
+- Competitive salary and equity package
+- Comprehensive health benefits and wellness programs
+- Professional development and conference budget
+- Modern office in downtown Austin
+- Collaborative culture with regular team events
+- Opportunity to shape the future of our product",130000,ProductCraft Solutions,pm@productcraft.com,https://productcraft.com/careers,https://productcraft.io/logos/productcraft.png,true
+devops-engineer-kubernetes-denver,DevOps Engineer (Kubernetes/Cloud),Full-time,Remote,"Denver, CO","Help us build and maintain robust cloud infrastructure that powers our applications serving millions of users. We're looking for a DevOps Engineer passionate about automation, scalability, and reliability.
+
+Your Impact:
+- Design and implement cloud infrastructure using AWS and Kubernetes
+- Build and maintain CI/CD pipelines for automated deployments
+- Monitor system performance and implement observability solutions
+- Ensure security compliance and best practices across all systems
+- Automate infrastructure provisioning and configuration management
+- Collaborate with development teams to optimize deployment processes
+
+Technology Stack:
+- Cloud: AWS, Azure, Google Cloud Platform
+- Containerization: Docker, Kubernetes, Helm
+- CI/CD: Jenkins, GitLab CI, GitHub Actions
+- Monitoring: Prometheus, Grafana, ELK Stack
+- Infrastructure as Code: Terraform, CloudFormation
+- Scripting: Python, Bash, PowerShell
+
+Requirements:
+- 4+ years of DevOps or Site Reliability Engineering experience
+- Strong experience with containerization and orchestration
+- Proficiency in cloud platforms (AWS preferred)
+- Knowledge of infrastructure as code tools
+- Experience with monitoring and logging solutions
+- Understanding of security best practices and compliance
+
+Perks and Benefits:
+- Remote-first culture with flexible schedule
+- Top-tier health, dental, and vision coverage
+- Generous 401(k) matching and stock options
+- Annual learning and development budget
+- Home office stipend and equipment allowance
+- Regular virtual and in-person team gatherings",140000,InfraGuard Systems,devops@infraguard.io,https://infraguard.io/careers,https://infraguard.io/logos/infraguard.png,true
+senior-ui-ux-designer-miami,Senior UI/UX Designer,Full-time,Hybrid,"Miami, FL","Join our creative team to design beautiful, intuitive digital experiences that delight our users. We're looking for a Senior UI/UX Designer who can transform complex problems into elegant solutions.
+
+Design Role:
+- Create user-centered designs for web and mobile applications
+- Conduct user research and usability testing to inform design decisions
+- Develop wireframes, prototypes, and high-fidelity mockups
+- Collaborate with product managers and developers to bring designs to life
+- Maintain and evolve our design system and brand guidelines
+- Present design concepts to stakeholders and incorporate feedback
+
+Design Process:
+- User research and persona development
+- Journey mapping and user flow creation
+- Information architecture and wireframing
+- Interactive prototyping and user testing
+- Visual design and asset creation
+- Design handoff and development collaboration
+
+Required Skills:
+- 5+ years of professional UI/UX design experience
+- Proficiency in design tools (Figma, Sketch, Adobe Creative Suite)
+- Strong portfolio demonstrating user-centered design approach
+- Experience with responsive design and mobile-first principles
+- Understanding of front-end development capabilities
+- Excellent communication and presentation skills
+
+Bonus Points:
+- Experience with design systems and component libraries
+- Knowledge of accessibility standards (WCAG)
+- Background in user research and data analysis
+- Experience with motion design and prototyping tools
+
+What We Offer:
+- Competitive salary and performance bonuses
+- Flexible work arrangements (hybrid model)
+- Professional development and conference opportunities
+- Creative work environment with the latest tools
+- Collaborative team culture and design critique sessions
+- Beautiful office space in Miami's design district",110000,CreativeFlow Studio,design@creativeflow.com,https://creativeflow.com/careers,https://creativeflow.com/logos/creativeflow.png,true
+data-scientist-machine-learning-boston,Data Scientist (Machine Learning),Full-time,Remote,"Boston, MA","We're seeking a talented Data Scientist to join our AI team and develop machine learning models that drive business insights and innovation. You'll work with large datasets and cutting-edge ML technologies.
+
+Scientific Role:
+- Develop and implement machine learning models for prediction and classification
+- Analyze large datasets to extract actionable insights
+- Design and run A/B tests to validate model performance
+- Collaborate with engineering teams to deploy models to production
+- Create data visualizations and reports for stakeholders
+- Stay current with latest ML research and techniques
+
+Technical Environment:
+- Languages: Python, R, SQL
+- ML Frameworks: TensorFlow, PyTorch, scikit-learn
+- Data Processing: Pandas, NumPy, Apache Spark
+- Visualization: Tableau, Matplotlib, Seaborn
+- Cloud: AWS SageMaker, Google Cloud AI
+- Tools: Jupyter, Git, Docker
+
+Requirements:
+- 3+ years of experience in data science or machine learning
+- Strong programming skills in Python and data analysis libraries
+- Experience with machine learning frameworks and algorithms
+- Knowledge of statistical analysis and experimental design
+- Ability to communicate complex concepts to non-technical audiences
+- Master's or PhD in Computer Science, Statistics, or related field
+
+Projects You'll Work On:
+- Customer churn prediction and retention models
+- Recommendation systems and personalization engines
+- Natural language processing for text analysis
+- Time series forecasting and anomaly detection
+- Computer vision applications for image recognition
+
+Benefits:
+- Remote work flexibility with occasional travel
+- Comprehensive health insurance and wellness programs
+- Generous budget for conferences and professional development
+- Access to cutting-edge tools and computing resources
+- Collaborative research environment with PhD-level colleagues
+- Opportunities to publish and present at industry conferences",135000,AI Insights Labs,datascience@aiinsights.ai,https://aiinsights.ai/careers,https://aiinsights.ai/logos/aiinsights.png,true
+mobile-app-developer-react-native-chicago,Mobile App Developer (React Native),Full-time,Hybrid,"Chicago, IL","Build amazing mobile experiences that millions of users love. We're looking for a Mobile App Developer to create high-quality iOS and Android applications using React Native.
+
+Development Focus:
+- Design and develop mobile applications using React Native
+- Ensure optimal performance across iOS and Android platforms
+- Integrate with backend APIs and third-party services
+- Implement secure authentication and data handling
+- Optimize app performance and user experience
+- Collaborate with designers to create beautiful, intuitive interfaces
+
+Technical Requirements:
+- 3+ years of mobile app development experience
+- Strong proficiency in React Native and its ecosystem
+- Experience with native iOS/Android development (Swift/Kotlin, Java)
+- Knowledge of mobile app architecture and design patterns
+- Familiarity with state management (Redux, MobX)
+- Understanding of mobile security and performance optimization
+
+Development Stack:
+- Frontend: React Native, TypeScript, Expo
+- State Management: Redux Toolkit, React Query
+- Testing: Jest, Detox, React Native Testing Library
+- CI/CD: GitHub Actions, Fastlane
+- Tools: Flipper, Reactotron, Xcode, Android Studio
+
+Responsibilities:
+- Write clean, maintainable, and well-documented code
+- Participate in code reviews and maintain coding standards
+- Debug and resolve performance issues
+- Work with product managers to define technical requirements
+- Mentor junior developers and share knowledge
+
+Why Work With Us:
+- Competitive salary and equity package
+- Flexible hybrid work arrangement
+- Latest development equipment and tools
+- Professional development budget and training
+- Modern office in Chicago's tech hub
+- Collaborative team culture and regular social events",115000,MobileFirst Solutions,mobile@mobilefirst.io,https://mobilefirst.io/careers,https://mobilefirst.io/logos/mobilefirst.png,true
+cybersecurity-analyst-dallas,Cybersecurity Analyst,Full-time,On-site,"Dallas, TX","Protect our digital infrastructure and ensure the security of our systems and data. We're seeking a Cybersecurity Analyst to strengthen our security posture and respond to emerging threats.
+
+Security Role:
+- Monitor and analyze security alerts from various security tools
+- Conduct security assessments and vulnerability testing
+- Respond to security incidents and perform forensic analysis
+- Develop and implement security policies and procedures
+- Train employees on security best practices
+- Collaborate with IT teams to implement security controls
+
+Security Tools & Technologies:
+- SIEM: Splunk, QRadar, or similar
+- Vulnerability Scanners: Nessus, Qualys
+- Network Security: Firewalls, IDS/IPS
+- Endpoint Protection: CrowdStrike, SentinelOne
+- Cloud Security: AWS Security Hub, Azure Security Center
+- Compliance: NIST, ISO 27001, SOC 2
+
+Requirements:
+- 3+ years of cybersecurity experience
+- Knowledge of security frameworks and best practices
+- Experience with security monitoring and incident response
+- Understanding of network security and encryption technologies
+- Relevant certifications (CISSP, CEH, Security+ preferred)
+- Bachelor's degree in Cybersecurity, IT, or related field
+
+Key Responsibilities:
+- Threat hunting and proactive security monitoring
+- Security incident response and investigation
+- Risk assessment and vulnerability management
+- Security awareness training program development
+- Compliance audit support and documentation
+- Security tool evaluation and implementation
+
+Benefits Package:
+- Competitive salary with performance bonuses
+- Comprehensive benefits including health, dental, vision
+- Tuition reimbursement for certifications and education
+- Cutting-edge security tools and training resources
+- Opportunities for specialization and career advancement
+- Supportive team environment and continuous learning culture",120000,SecureNet Technologies,security@securenet.io,https://securenet.io/careers,https://securenet.io/logos/securenet.png,true
+qa-engineer-automation-portland,QA Engineer (Automation),Full-time,Remote,"Portland, OR","Ensure the quality and reliability of our software products through comprehensive testing strategies. We're looking for a QA Engineer to develop and execute automated and manual test plans.
+
+Quality Assurance Role:
+- Design and implement automated testing frameworks and scripts
+- Execute manual and automated test cases across web and mobile applications
+- Identify, document, and track software defects and issues
+- Collaborate with development teams to resolve quality issues
+- Develop and maintain test documentation and reports
+- Participate in agile ceremonies and provide quality feedback
+
+Testing Technologies:
+- Automation: Selenium, Cypress, Playwright
+- API Testing: Postman, Rest Assured
+- Mobile Testing: Appium, Espresso, XCUITest
+- Performance Testing: JMeter, LoadRunner
+- CI/CD Integration: Jenkins, GitHub Actions
+- Test Management: TestRail, Zephyr
+
+Requirements:
+- 3+ years of quality assurance experience
+- Strong experience with test automation frameworks
+- Knowledge of programming languages (JavaScript, Python, Java)
+- Understanding of software testing methodologies and best practices
+- Experience with API testing and database validation
+- Detail-oriented with strong analytical and problem-solving skills
+
+Daily Responsibilities:
+- Write and maintain automated test scripts
+- Execute manual exploratory and regression testing
+- Analyze test results and create detailed reports
+- Work with developers to troubleshoot and resolve defects
+- Participate in requirement reviews and test planning
+- Mentor team members on testing best practices
+
+What We Offer:
+- Remote-first culture with flexible scheduling
+- Competitive salary and annual performance bonuses
+- Health, dental, and vision insurance
+- Professional development and certification support
+- Modern testing tools and equipment allowance
+- Collaborative team environment with regular knowledge sharing",105000,QualityFirst Labs,qa@qualityfirst.com,https://qualityfirst.com/careers,https://qualityfirst.com/logos/qualityfirst.png,true

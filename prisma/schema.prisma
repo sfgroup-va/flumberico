@@ -1,0 +1,271 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id                  String               @id @default(cuid())
+  email               String               @unique
+  name                String?
+  password            String?
+  emailVerified       DateTime?
+  image               String?
+  role                String               @default("user")
+  subscriptionTier    String               @default("free")
+  subscriptionId      String?
+  subscriptionEndsAt  DateTime?
+  isActiveHunter      Boolean              @default(false)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  hunterJobCount      Int                  @default(0)
+  hunterJobLimit      Int                  @default(10)
+  lastHunterScanAt    DateTime?
+  hunterLogs          HunterLog[]
+  applications        JobApplication[]
+  jobPreferences      JobPreferences?
+  targetingMatrix     JobTargetingMatrix?
+  recommendationViews RecommendationView[]
+  resumeDNA           ResumeDNA?
+  savedJobs           SavedJob[]
+  profile             UserProfile?
+
+  @@map("users")
+}
+
+model UserProfile {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  headline              String?
+  summary               String?
+  aiOptimizedSummary    String?
+  phone                 String?
+  location              String?
+  website               String?
+  linkedin              String?
+  github                String?
+  portfolio             String?
+  desiredJobTitles      String[]
+  desiredLocations      String[]
+  onboardingCompleted   Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  expectedSalaryMax     Int?
+  expectedSalaryMin     Int?
+  experienceYears       Int      @default(0)
+  preferredJobTypes     String[]
+  preferredLocationType String   @default("remote")
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+model ResumeDNA {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  fileUrl            String?
+  fileName           String?
+  extractedText      String?
+  parsedExperience   Json?
+  parsedEducation    Json?
+  aiOptimizedSummary String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  skills             String[]
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("resume_dna")
+}
+
+model JobTargetingMatrix {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  jobTitles        String[]
+  locations        String[]
+  companySizes     String[]
+  industries       String[]
+  salaryMin        Int?
+  salaryMax        Int?
+  remoteOnly       Boolean  @default(true)
+  mustHaveSkills   String[]
+  niceToHaveSkills String[]
+  excludeCompanies String[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("job_targeting_matrix")
+}
+
+model JobApplication {
+  id                String    @id @default(cuid())
+  userId            String
+  jobId             Int
+  status            String    @default("pending")
+  appliedAt         DateTime  @default(now())
+  notes             String?
+  aiGenerated       Boolean   @default(false)
+  coverLetter       String?
+  resumeUrl         String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  applicationSource String    @default("manual")
+  matchReasoning    String?
+  matchScore        Int?
+  stealthDelay      Int?
+  method            String    @default("manual")
+  submittedAt       DateTime?
+  job               Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, jobId])
+  @@map("job_applications")
+}
+
+model SavedJob {
+  id      String   @id @default(cuid())
+  userId  String
+  jobId   Int
+  savedAt DateTime @default(now())
+  job     Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, jobId])
+  @@map("saved_jobs")
+}
+
+model Job {
+  id                    Int                  @id @default(autoincrement())
+  slug                  String               @unique
+  title                 String
+  type                  String
+  locationType          String
+  location              String?
+  description           String?
+  salary                Int?
+  companyName           String
+  applicationEmail      String?
+  applicationUrl        String?
+  companyLogoUrl        String?
+  approved              Boolean              @default(false)
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  salaryMax             Int?
+  salaryMin             Int?
+  applicationCount      Int                  @default(0)
+  companyId             String?
+  expiresAt             DateTime?
+  featured              Boolean              @default(false)
+  isActive              Boolean              @default(true)
+  aiEnhancedDescription String?
+  aiExperienceLevel     String?
+  aiExtractedSkills     String[]
+  aiJobType             String?
+  aiMatchKeywords       String[]
+  aiRequirements        Json?
+  aiSalaryInsight       String?
+  applications          JobApplication[]
+  company               Company?             @relation(fields: [companyId], references: [id])
+  recommendationViews   RecommendationView[]
+  savedJobs             SavedJob[]
+
+  @@map("jobs")
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String?
+  industry  String?
+  website   String?
+  size      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  jobs      Job[]
+
+  @@map("companies")
+}
+
+model HunterLog {
+  id             String   @id @default(cuid())
+  userId         String
+  action         String
+  details        Json?
+  jobId          Int?
+  success        Boolean  @default(true)
+  errorMessage   String?
+  processingTime Int?
+  createdAt      DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("hunter_logs")
+}
+
+model QueueJob {
+  id           String    @id @default(cuid())
+  queueName    String
+  jobData      Json
+  status       String    @default("waiting")
+  priority     Int       @default(0)
+  attempts     Int       @default(0)
+  maxAttempts  Int       @default(3)
+  errorMessage String?
+  result       Json?
+  startedAt    DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("queue_jobs")
+}
+
+model SubscriptionPlan {
+  id            String   @id @default(cuid())
+  planId        String   @unique
+  name          String
+  price         Int
+  currency      String   @default("USD")
+  interval      String   @default("month")
+  features      Json
+  limits        Json
+  stripePriceId String?
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("subscription_plans")
+}
+
+model RecommendationView {
+  id       String   @id @default(cuid())
+  userId   String
+  jobId    Int
+  viewedAt DateTime @default(now())
+  job      Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, jobId, viewedAt])
+  @@index([userId, viewedAt])
+  @@map("recommendation_views")
+}
+
+model JobPreferences {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  desiredJobTitles      String[] @default([])
+  preferredLocations    String[] @default([])
+  preferredJobType      String?
+  preferredRemoteOption String?
+  minSalary             Int?
+  maxSalary             Int?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("job_preferences")
+}
