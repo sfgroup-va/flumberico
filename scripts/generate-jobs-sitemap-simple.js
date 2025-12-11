@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://your-domain.com';
+const BASE_URL = 'https://flumberico.vercel.app';
 
 // Sample job slugs - replace with actual jobs from your database
 const sampleJobSlugs = [

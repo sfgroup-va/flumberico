@@ -6,7 +6,7 @@
 require('dotenv').config();
 const { PrismaClient } = require('@prisma/client');
 
-const BASE_URL = 'https://your-domain.com';
+const BASE_URL = 'https://flumberico.vercel.app';
 
 async function generateJobsSitemap() {
   const prisma = new PrismaClient();
