@@ -124,16 +124,7 @@ npm run dev
 
 ---
 
-## 📸 Screenshots
-
-<div align="center">
-  <img src="./public/Alex Chen.png" alt="Flumberico Platform" width="800"/>
-  <p><em>Modern, intuitive interface designed for the best user experience</em></p>
-</div>
-
----
-
-## 🌐 Live Demo
+## 🌐 Website
 
 Experience Flumberico live at **[flumberico.com](https://flumberico.com)**
 
