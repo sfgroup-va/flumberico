@@ -243,11 +243,11 @@ function JobDetailsCard({ job }: { job: any }) {
                         className="w-16 h-16 rounded-lg object-cover border border-border/50"
                       />
                     )}
-                    <div>
-                      <h1 className="text-3xl font-bold text-foreground mb-2">
+                    <div className="flex-1 min-w-0">
+                      <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2 break-words">
                         {job.title}
                       </h1>
-                      <div className="flex items-center gap-4 text-muted-foreground mb-3">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs md:text-sm text-muted-foreground mb-3">
                         <div className="flex items-center gap-1">
                           <Building className="w-4 h-4" />
                           <span>{companyName}</span>
@@ -261,14 +261,15 @@ function JobDetailsCard({ job }: { job: any }) {
                           <span>{job.type || 'Full-time'}</span>
                         </div>
                       </div>
+                      <JobActions
+                        jobId={job.id}
+                        jobTitle={job.title}
+                        companyName={companyName}
+                      />
                     </div>
                   </div>
 
-                  <JobActions
-                    jobId={job.id}
-                    jobTitle={job.title}
-                    companyName={companyName}
-                  />
+
                 </div>
 
                 {/* Job Details Grid */}
