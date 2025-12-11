@@ -18,15 +18,7 @@ interface IndexingResult {
     url?: string;
     action?: IndexingAction;
     error?: string;
-    metadata?: {
-        urlNotificationMetadata?: {
-            url?: string;
-            latestUpdate?: {
-                type?: string;
-                notifyTime?: string;
-            };
-        };
-    };
+    metadata?: any;
 }
 
 /**
