@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Base URL for your site
-const BASE_URL = 'https://flumberico.vercel.app';
+const BASE_URL = 'https://flumbericoco.com';
 
 // Static pages that should be included in sitemap
 const staticPages = [
