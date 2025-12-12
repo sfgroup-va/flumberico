@@ -113,7 +113,7 @@ export default function FeaturedJobs({ className = "" }: FeaturedJobsProps) {
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Discover AI-enhanced job descriptions that match your skills perfectly
+              Find your dream job with AI-enhanced matching that fits your skills perfectly
             </p>
           </div>
 
@@ -187,17 +187,17 @@ export default function FeaturedJobs({ className = "" }: FeaturedJobsProps) {
             </span>
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover AI-enhanced job descriptions that match your skills perfectly
+            Find your dream job with AI-enhanced matching that fits your skills perfectly
           </p>
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6 px-4">
             <span className="px-4 py-2 bg-green-500/20 text-green-400 rounded-full text-xs sm:text-sm font-medium">
-              ✨ AI-Optimized Descriptions
+              ✨ Verified Opportunities
             </span>
             <span className="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-xs sm:text-sm font-medium">
-              🎯 Perfect Match Algorithm
+              🎯 Smart Matching
             </span>
             <span className="px-4 py-2 bg-purple-500/20 text-purple-400 rounded-full text-xs sm:text-sm font-medium">
-              🚀 Apply with One Click
+              🚀 Streamlined Application
             </span>
           </div>
         </motion.div>
