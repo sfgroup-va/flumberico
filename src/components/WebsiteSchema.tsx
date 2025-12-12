@@ -5,39 +5,40 @@ interface WebsiteSchemaProps {
 }
 
 export default function WebsiteSchema({
-  siteUrl = "https://your-domain.com",
-  siteName = "AI Job Board",
-  description = "AI-powered job hunting platform that matches candidates with their dream jobs using advanced machine learning algorithms."
+  siteUrl = "https://flumbericoco.com",
+  siteName = "Flumberico",
+  description = "Stop Applying. Start Getting Interviews. AI-powered job hunting that works while you sleep."
 }: WebsiteSchemaProps) {
   const schema = {
     "@context": "https://schema.org/",
     "@type": "Organization",
     "name": siteName,
     "url": siteUrl,
-    "logo": `${siteUrl}/logo.png`,
+    "logo": "https://flumbericoco.com/_next/image?url=%2FFavicon%20Flumberico.png&w=1920&q=75",
     "description": description,
+    "email": "hello@flumberico.com",
     "sameAs": [
       // Add social media URLs here
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-555-JOBS",
+      "telephone": "1 336-457-3841",
       "contactType": "customer service",
       "availableLanguage": ["English"]
     },
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Tech Street",
-      "addressLocality": "San Francisco",
-      "addressRegion": "CA",
-      "postalCode": "94105",
+      "streetAddress": "4976 Keyser Ridge Road",
+      "addressLocality": "Greensboro",
+      "addressRegion": "NC",
+      "postalCode": "27401",
       "addressCountry": "US"
     },
     "foundingDate": "2024",
     "founders": [
       {
         "@type": "Person",
-        "name": "AI Job Board Team"
+        "name": "Flumberico Team"
       }
     ],
     "numberOfEmployees": {
@@ -81,7 +82,7 @@ export default function WebsiteSchema({
       "name": "United States"
     },
     "knowsLanguage": ["English"],
-    "legalName": "AI Job Board Inc.",
+    "legalName": "Flumberico Inc.",
     "taxID": "12-3456789"
   };
 

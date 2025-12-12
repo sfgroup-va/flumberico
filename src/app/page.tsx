@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXTAUTH_URL || 'https://your-domain.com'),
+  metadataBase: new URL(process.env.NEXTAUTH_URL || 'https://flumberico.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXTAUTH_URL || 'https://your-domain.com',
+    url: process.env.NEXTAUTH_URL || 'https://flumberico.com',
     title: 'Flumberico - AI-Powered Job Hunting | Stop Applying, Start Getting Interviews',
     description: 'AI applies to 200+ perfect-fit jobs monthly while you sleep. Just $15/month or get Pro plan FREE by referring 2 friends.',
     siteName: 'Flumberico',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
       "@type": "WebApplication",
       "name": "Flumberico",
       "description": "AI-powered job hunting platform that automatically applies to perfect-fit jobs while you sleep",
-      "url": process.env.NEXTAUTH_URL || 'https://your-domain.com',
+      "url": (process.env.NEXTAUTH_URL || 'https://flumberico.com').replace(/\/$/, ''),
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web Browser",
       "offers": {
@@ -90,7 +90,24 @@ export const metadata: Metadata = {
       },
       "author": {
         "@type": "Organization",
-        "name": "Flumberico Team"
+        "name": "Flumberico",
+        "url": "https://flumbericoco.com",
+        "logo": "https://flumbericoco.com/_next/image?url=%2FFavicon%20Flumberico.png&w=1920&q=75",
+        "email": "hello@flumberico.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "1 336-457-3841",
+          "contactType": "customer service",
+          "availableLanguage": ["English"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "4976 Keyser Ridge Road",
+          "addressLocality": "Greensboro",
+          "addressRegion": "NC",
+          "postalCode": "27401",
+          "addressCountry": "US"
+        }
       }
     })
   }

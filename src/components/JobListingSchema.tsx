@@ -8,8 +8,8 @@ interface JobListingSchemaProps {
 
 export default function JobListingSchema({
   jobs,
-  pageUrl = "https://your-domain.com/jobs",
-  organizationName = "Job Board Platform"
+  pageUrl = "https://flumberico.com/jobs",
+  organizationName = "Flumberico"
 }: JobListingSchemaProps) {
   // Convert jobs to JobPosting schema format
   const jobPostings = jobs.map((job) => {

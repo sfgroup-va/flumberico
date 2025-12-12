@@ -66,8 +66,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ].filter(Boolean),
     authors: [{ name: companyName }],
     creator: companyName,
-    publisher: 'Flow Jobs',
-    metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:3000'),
+    publisher: 'Flumberico',
+    metadataBase: new URL(process.env.NEXTAUTH_URL || 'https://flumberico.com'),
     alternates: {
       canonical: `/jobs/${job.slug}`,
     },
@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `/jobs/${job.slug}`,
       title: `${job.title} at ${companyName}`,
       description: job.description?.substring(0, 160) || 'Great opportunity for qualified candidates.',
-      siteName: 'Flow Jobs',
+      siteName: 'Flumberico',
       images: [
         {
           url: job.companyLogoUrl || '/images/default-company-logo.png',
