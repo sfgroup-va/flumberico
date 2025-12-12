@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import prisma from '@/lib/prisma';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXTAUTH_URL || 'https://flumberico.com';
+    const baseUrl = (process.env.NEXTAUTH_URL || 'https://flumberico.com').replace(/\/$/, '');
 
     // Static pages with their priorities and change frequencies
     const staticPages: MetadataRoute.Sitemap = [

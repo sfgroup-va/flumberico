@@ -28,7 +28,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-w-[350px]`} suppressHydrationWarning>
         {/* Website Schema Markup */}
-        <WebsiteSchema />
+        <WebsiteSchema
+          siteUrl={(process.env.NEXTAUTH_URL || "https://flumberico.com").replace(/\/$/, "")}
+          siteName="Flumberico"
+          description="Stop Applying. Start Getting Interviews. AI-powered job hunting that works while you sleep."
+        />
 
         <NextAuthProvider>
           <Navbar />
